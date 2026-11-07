@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        padding-top: 40px;
+    }
+    .kotak {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        width: 450px;
+    }
+    h1 { text-align: center; color: #333; margin-bottom: 5px; }
+    #sisaTugas { text-align: center; color: #888; margin-top: 0; font-size: 14px; }
+    input {
+        padding: 10px;
+        width: 65%;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        outline: none;
+    }
+    button {
+        border: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+    }
+    .btn-tambah { background: #4CAF50; }
+    .btn-hapus { background: #F44336; }
+    .btn-bersih { background: #2196F3; width: 100%; margin-top: 15px; }
+    ul { list-style: none; padding: 0; margin-top: 20px; }
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+    }
+    li.selesai span { text-decoration: line-through; color: #aaa; }
+    </style>
+</head>
+<body>
+    <div class="kotak">
+        <h1>To-Do List Gue</h1>
+        <p id="sisaTugas">Sisa 0 tugas</p>
+
+        <input id="tugasInput" type="text" placeholder="Mau ngapain hari ini?">
+        <button id="tombolTambah" class="btn-tambah">Tambah</button>
+
+        <ul id="listTugas"></ul>
+
+        <button id="tombolBersih" class="btn-bersih">Hapus yang Sudah Selesai</button>
+    </div>
+
+    <script>
+        let input = document.getElementById("tugasInput");
+        let tombol = document.getElementById("tombolTambah");
+        let list = document.getElementById("listTugas");
+        let sisaText = document.getElementById("sisaTugas");
+        let tombolBersih = document.getElementById("tombolBersih");
+
+        let daftarTugas = JSON.parse(localStorage.getItem("todo")) || [];
+
+        function simpan() {
+            localStorage.setItem("todo", JSON.stringify(daftarTugas));
+        }
+
+        function tampilkan() {
+            list.innerHTML = "";
+            let sisa = 0;
+            daftarTugas.forEach(function(tugas, index) {
+                if (!tugas.selesai) sisa++;
+                let li = document.createElement("li");
+                if (tugas.selesai) li.classList.add("selesai");
+
+                li.innerHTML = '<span onclick="centang(' + index + ')" style="cursor:pointer; flex:1;">' + tugas.nama + '</span>' +
+                '<button class="btn-hapus" onclick="hapusTugas(' + index + ')">Hapus</button>';
+
+                list.appendChild(li);
+            });
+            sisaText.textContent = "Sisa " + sisa + " tugas";
+        }
+
+        function centang(index) {
+            daftarTugas[index].selesai = !daftarTugas[index].selesai;
+            simpan();
+            tampilkan();
+        }
+
+        function hapusTugas(index) {
+            daftarTugas.splice(index, 1);
+            simpan();
+            tampilkan();
+        }
+
+        tombolBersih.addEventListener("click", function() {
+            daftarTugas = daftarTugas.filter(function(tugas) {
+                return !tugas.selesai;
+            });
+            simpan();
+            tampilkan();
+        });
+
+        tombol.addEventListener("click", function() {
+            let nama = input.value;
+            if (nama === "") {
+                alert("Tugasnya jangan kosong dong!!");
+                return;
+            }
+            daftarTugas.push({ nama: nama, selesai: false });
+            simpan();
+            tampilkan();
+            input.value = "";
+        });
+
+        tampilkan();
+    </script>
+</body>
+</html>

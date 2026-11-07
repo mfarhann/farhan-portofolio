@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        padding-top: 40px;
+    }
+    .kotak {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        width: 450px;
+    }
+    h1 { text-align: center; color: #333; }
+    input {
+        padding: 10px;
+        width: 65%;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        outline: none;
+    }
+    button {
+        border: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+    }
+    .btn-tambah { background: #4CAF50; }
+    .btn-edit { background: #FFC107; color: black; }
+    .btn-hapus { background: #F44336; }
+    button:hover { opacity: 0.8; }
+    table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+    th { background: #f8f9fa; text-align: center; padding: 10px; }
+    td { padding: 10px; border-bottom: 1px solid #eee; text-align: center; }
+        </style>
+    </head>
+    <body>
+      <div class="kotak">
+    <h1>Data Siswa</h1>
+
+    <input id="namaInput" type="text" placeholder="Masukkan Nama">
+    <button id="tombolTambah" class="btn-tambah">Tambah</button>
+
+    <input id="cariInput" type="text" placeholder="Cari nama..." style="width: 93%; margin-top: 10px;">
+    <button id="tombolUrut" style="background: #2196F3; margin-top: 10px; width: 100%;">Urutkan A-Z</button>
+    <table id="tabelSiswa">
+
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Aksi</th>
+
+            </tr>
+        </table>
+        <script>
+            let input = document.getElementById("namaInput");
+            let tombol = document.getElementById("tombolTambah");
+            let tabel = document.getElementById("tabelSiswa");
+            let cariInput = document.getElementById("cariInput");
+            let tombolUrut = document.getElementById("tombolUrut");
+
+            tombolUrut.addEventListener("click", function(){
+            daftarSiswa.sort(function(a, b){
+        return a.toLowerCase().localeCompare(b.toLowerCase());
+    });
+    simpan();
+    tampilkan();
+});
+            let kataCari = "";
+
+    cariInput.addEventListener("input", function(){
+    kataCari = cariInput.value.toLowerCase();
+    tampilkan();
+});
+
+            let daftarSiswa = JSON.parse(localStorage.getItem("siswa")) || ["Farhan"];
+
+            function simpan() {
+                localStorage.setItem("siswa", JSON.stringify(daftarSiswa));
+            }
+
+          function tampilkan(){
+         tabel.innerHTML = '<tr><th>No</th><th>Nama</th><th>Aksi</th></tr>';
+
+         daftarSiswa.forEach(function(nama, index) {
+         if(nama.toLowerCase().includes(kataCari)){
+            let barisBaru = tabel.insertRow();
+            barisBaru.insertCell(0).textContent = index + 1;
+            barisBaru.insertCell(1).textContent = nama;
+            barisBaru.insertCell(2).innerHTML = '<button class="btn-edit" onclick="editSiswa(' + index + ')">Edit</button> <button class="btn-hapus" onclick="hapusSiswa(' + index + ')">Hapus</button>';
+        }
+    });
+}
+            function hapusSiswa(index){
+                daftarSiswa.splice(index, 1);
+                simpan();
+                tampilkan();
+            }
+            function editSiswa(index){
+                let namaBaru = prompt("Edit nama:", daftarSiswa[index]);
+
+                if (namaBaru === null){
+                    return;
+                }
+
+                if (namaBaru === ""){
+                    alert("Namanya jangan kosong dong!!");
+                    return;
+                }
+
+                daftarSiswa[index] = namaBaru;
+                simpan();
+                tampilkan();
+            }
+
+            tombol.addEventListener("click", function(){
+                let nama = input.value;
+                if (nama === ""){
+                    alert("Namanya jangan kosong dong!!");
+                    return; 
+                }
+                daftarSiswa.push(nama);
+                simpan();
+                tampilkan();
+                input.value = "";
+            });
+            tampilkan();
+        </script>
+        </div>
+    </body>
+</html>

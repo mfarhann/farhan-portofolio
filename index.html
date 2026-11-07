@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f0f1a; color: white; overflow-x: hidden; }
+a { text-decoration: none; }
+
+/* NAVBAR */
+.nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 30px; position: sticky; top: 0; z-index: 10;
+    background: rgba(15,15,26,0.8); backdrop-filter: blur(10px);
+}
+.nav b { font-size: 22px; }
+.nav b span { color: #a78bfa; }
+.nav a { color: #ccc; font-size: 14px; margin-left: 18px; }
+
+/* HERO */
+.hero {
+    text-align: center; padding: 70px 20px 60px;
+    background: radial-gradient(circle at top, #4c1d95 0%, #0f0f1a 65%);
+}
+.badge {
+    display: inline-block; background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 7px 15px; border-radius: 20px; font-size: 13px; margin-bottom: 20px;
+}
+.hero h1 { font-size: 52px; line-height: 1.1; margin-bottom: 15px; }
+.hero h1 span {
+    background: linear-gradient(90deg, #a78bfa, #f472b6, #facc15);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero p { color: #aaa; max-width: 500px; margin: 0 auto; line-height: 1.6; }
+.btn-group { margin-top: 28px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn1 {
+    background: white; color: black; padding: 13px 28px;
+    border-radius: 30px; font-weight: bold; transition: 0.3s;
+}
+.btn1:hover { transform: scale(1.05); }
+.btn2 {
+    background: rgba(255,255,255,0.1); color: white; padding: 13px 28px;
+    border-radius: 30px; font-weight: bold; border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* STATS */
+.stats { display: flex; justify-content: center; gap: 40px; margin-top: 40px; flex-wrap: wrap; }
+.stats div { text-align: center; }
+.stats b { font-size: 28px; display: block; }
+.stats span { color: #888; font-size: 13px; }
+
+/* CONTAINER */
+.container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+.section-title { font-size: 28px; margin-bottom: 8px; }
+.section-sub { color: #888; margin-bottom: 25px; }
+
+/* SKILLS */
+.skills { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+.skills span {
+    background: #1e1e2e; border: 1px solid #333; padding: 10px 18px;
+    border-radius: 30px; font-size: 14px;
+}
+
+/* PROJECTS */
+.projects { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 650px) { .projects { grid-template-columns: 1fr; } .hero h1 { font-size: 38px; } }
+.card {
+    background: linear-gradient(145deg, #1e1e2e, #171724);
+    border: 1px solid #2d2d44; border-radius: 20px; padding: 28px;
+    transition: 0.3s; position: relative; overflow: hidden;
+}
+.card:hover { transform: translateY(-8px); border-color: #a78bfa; box-shadow: 0 20px 40px rgba(167,139,250,0.2); }
+.card .icon { font-size: 40px; margin-bottom: 15px; display: block; }
+.card h3 { font-size: 22px; margin-bottom: 10px; }
+.card p { color: #aaa; line-height: 1.6; font-size: 14px; margin-bottom: 20px; }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+.tags span { background: #2d2d44; font-size: 11px; padding: 5px 10px; border-radius: 15px; color: #ccc; }
+.card a {
+    display: inline-block; background: linear-gradient(90deg, #8b5cf6, #ec4899);
+    color: white; padding: 11px 22px; border-radius: 25px; font-weight: bold; font-size: 14px;
+}
+.card:nth-child(2) a { background: linear-gradient(90deg, #06b6d4, #3b82f6); }
+
+/* CTA */
+.cta {
+    margin-top: 40px; text-align: center; padding: 40px 20px;
+    background: linear-gradient(90deg, #7c3aed, #db2777);
+    border-radius: 20px;
+}
+.cta h2 { font-size: 26px; margin-bottom: 10px; }
+.cta p { opacity: 0.9; margin-bottom: 20px; }
+.cta a { background: white; color: black; padding: 12px 25px; border-radius: 25px; font-weight: bold; display: inline-block; }
+.footer { text-align: center; color: #555; padding: 25px; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+    <b>Farhan<span>.dev</span></b>
+    <div><a href="#projects">Proyek</a><a href="#tentang">Tentang</a></div>
+</div>
+
+<div class="hero">
+    <div class="badge">✨ Available buat proyek bareng</div>
+    <h1>Bikin Web Yang<br><span>Beneran Kepake.</span></h1>
+    <p>Halo, gue Farhan. Junior Web Developer yang suka bikin web simpel, cepet, dan langsung bisa dipake, bukan cuma pajangan.</p>
+    <div class="btn-group">
+        <a class="btn1" href="#projects">Lihat Proyek Gue ↓</a>
+        <a class="btn2" href="#tentang">Tentang Gue</a>
+    </div>
+    <div class="stats">
+        <div><b>3+</b><span>Proyek Selesai</span></div>
+        <div><b>100%</b><span>Dibuat Dari Nol</span></div>
+        <div><b>0</b><span>Pake Template</span></div>
+    </div>
+</div>
+
+<div class="container" id="tentang">
+    <h2 class="section-title">Skills Gue 💻</h2>
+    <p class="section-sub">Yang udah gue kuasain sejauh ini:</p>
+    <div class="skills">
+        <span>🟠 HTML</span><span>🎨 CSS</span><span>⚡ JavaScript</span><span>💾 LocalStorage</span><span>🔍 Search & Filter</span>
+    </div>
+
+    <h2 class="section-title" id="projects">Proyek Pilihan 🔥</h2>
+    <p class="section-sub">Klik buat nyobain langsung, semua jalan beneran.</p>
+
+    <div class="projects">
+        <div class="card">
+            <span class="icon">📚</span>
+            <h3>Data Siswa</h3>
+            <p>Aplikasi buat ngatur data siswa lengkap. Bisa tambah, edit, hapus, cari nama, dan urutkan A-Z. Datanya kesimpen otomatis.</p>
+            <div class="tags"><span>CRUD</span><span>Search</span><span>Sort</span></div>
+            <a href="datasiswa.html">Coba Sekarang →</a>
+        </div>
+        <div class="card">
+            <span class="icon">✅</span>
+            <h3>To-Do List PRO</h3>
+            <p>Atur tugas harian anti ribet. Centang kalau udah kelar, liat sisa tugas real-time, dan hapus yang selesai sekali klik.</p>
+            <div class="tags"><span>Checklist</span><span>Counter</span><span>LocalStorage</span></div>
+            <a href="todo.html">Coba Sekarang →</a>
+        </div>
+    </div>
+
+    <div class="cta">
+        <h2>Mau Bikin Web Juga? 🤝</h2>
+        <p>Gue lagi open buat belajar bareng / bikin proyek bareng.</p>
+        <a href="#">Chat Gue Sekarang</a>
+    </div>
+</div>
+
+<div class="footer">Dibuat oleh Farhan © 2026 - Dari Nol Sampe Jadi, Tanpa Template</div>
+
+</body>
+</html>
